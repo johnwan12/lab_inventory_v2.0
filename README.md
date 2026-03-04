@@ -1,3 +1,14 @@
+# Lab Inventory API
+
+FastAPI + Google Sheets inventory management system.
+
+Dashboard:
+http://127.0.0.1:8000/dashboard
+<!--<<<<<<< HEAD
+=======
+# lab_inventory_v2.0
+
+>>>>>>> 84e10514ba56b2666d65fa089c2a9cd40b9cb2f1-->
 # 🧪 Lab Reagent Inventory System v2
 
 Full-featured lab inventory management: Google Sheets database, FastAPI backend, JWT authentication, usage logging, barcode scanning, automated alerts, and a built-in web dashboard.
