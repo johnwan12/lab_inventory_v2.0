@@ -1,4 +1,4 @@
-from pydantic import BaseModel, validator, Field
+from pydantic import BaseModel, field_validator, Field
 from typing import Optional, List
 from datetime import date
 import re
@@ -16,7 +16,8 @@ class InventoryItem(BaseModel):
     low_stock_threshold: float = Field(0, ge=0)
     barcode: Optional[str] = ""
 
-    @validator("expiration_date", pre=True, always=True)
+    @field_validator("expiration_date", mode="before")
+    @classmethod
     def validate_expiration_date(cls, v):
         if v is None or v == "":
             return None
@@ -25,7 +26,8 @@ class InventoryItem(BaseModel):
         date.fromisoformat(str(v))
         return str(v)
 
-    @validator("quantity", "low_stock_threshold", pre=True)
+    @field_validator("quantity", "low_stock_threshold", mode="before")
+    @classmethod
     def coerce_numeric(cls, v):
         val = float(v)
         if val < 0:
@@ -44,7 +46,8 @@ class InventoryUpdate(BaseModel):
     cas_number: Optional[str] = None
     unit: Optional[str] = None
 
-    @validator("expiration_date", pre=True, always=True)
+    @field_validator("expiration_date", mode="before")
+    @classmethod
     def validate_expiration_date(cls, v):
         if v is None or v == "":
             return None
